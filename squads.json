@@ -1,0 +1,996 @@
+{
+ "_help": "One entry per player a manager owns. price = £m paid. from_gw = first gameweek the player counts for (1 for the original squad). to_gw = last gameweek the player counts for; null means still owned. January trade: set to_gw on the player sold (e.g. 20) and add the replacement with from_gw one higher (21). For a new player you can leave out code and just give the name as FPL spells it (web name, e.g. Haaland), plus team (3-letter, e.g. MCI) only if two players share a name.",
+ "budget": 100,
+ "squads": [
+  {
+   "owner": "Tom",
+   "player": "Pickford",
+   "code": 111234,
+   "position": "Goalkeeper",
+   "price": 4,
+   "from_gw": 1,
+   "to_gw": null
+  },
+  {
+   "owner": "Tom",
+   "player": "Matheus N.",
+   "code": 465351,
+   "position": "Defender",
+   "price": 5,
+   "from_gw": 1,
+   "to_gw": null
+  },
+  {
+   "owner": "Tom",
+   "player": "Van Hecke",
+   "code": 469142,
+   "position": "Defender",
+   "price": 6,
+   "from_gw": 1,
+   "to_gw": null
+  },
+  {
+   "owner": "Tom",
+   "player": "Konsa",
+   "code": 199798,
+   "position": "Defender",
+   "price": 1,
+   "from_gw": 1,
+   "to_gw": null
+  },
+  {
+   "owner": "Tom",
+   "player": "Gibbs-White",
+   "code": 222531,
+   "position": "Midfielder",
+   "price": 21,
+   "from_gw": 1,
+   "to_gw": null
+  },
+  {
+   "owner": "Tom",
+   "player": "Dewsbury-Hall",
+   "code": 215413,
+   "position": "Midfielder",
+   "price": 8,
+   "from_gw": 1,
+   "to_gw": null
+  },
+  {
+   "owner": "Tom",
+   "player": "Tavernier",
+   "code": 201658,
+   "position": "Midfielder",
+   "price": 7,
+   "from_gw": 1,
+   "to_gw": null
+  },
+  {
+   "owner": "Tom",
+   "player": "McGinn",
+   "code": 122806,
+   "position": "Midfielder",
+   "price": 4,
+   "from_gw": 1,
+   "to_gw": null
+  },
+  {
+   "owner": "Tom",
+   "player": "Wilson",
+   "code": 153682,
+   "position": "Midfielder",
+   "price": 7,
+   "from_gw": 1,
+   "to_gw": null
+  },
+  {
+   "owner": "Tom",
+   "player": "Thiago",
+   "code": 502500,
+   "position": "Forward",
+   "price": 27,
+   "from_gw": 1,
+   "to_gw": null
+  },
+  {
+   "owner": "Tom",
+   "player": "Evanilson",
+   "code": 444102,
+   "position": "Forward",
+   "price": 9,
+   "from_gw": 1,
+   "to_gw": null
+  },
+  {
+   "owner": "Karan",
+   "player": "Lammens",
+   "code": 465247,
+   "position": "Goalkeeper",
+   "price": 2,
+   "from_gw": 1,
+   "to_gw": null
+  },
+  {
+   "owner": "Karan",
+   "player": "Gabriel",
+   "code": 226597,
+   "position": "Defender",
+   "price": 23,
+   "from_gw": 1,
+   "to_gw": null
+  },
+  {
+   "owner": "Karan",
+   "player": "Senesi",
+   "code": 221466,
+   "position": "Defender",
+   "price": 4,
+   "from_gw": 1,
+   "to_gw": null
+  },
+  {
+   "owner": "Karan",
+   "player": "Branthwaite",
+   "code": 480455,
+   "position": "Defender",
+   "price": 1,
+   "from_gw": 1,
+   "to_gw": null
+  },
+  {
+   "owner": "Karan",
+   "player": "Wirtz",
+   "code": 494595,
+   "position": "Midfielder",
+   "price": 25,
+   "from_gw": 1,
+   "to_gw": null
+  },
+  {
+   "owner": "Karan",
+   "player": "Gakpo",
+   "code": 243298,
+   "position": "Midfielder",
+   "price": 1,
+   "from_gw": 1,
+   "to_gw": null
+  },
+  {
+   "owner": "Karan",
+   "player": "E.Le Fée",
+   "code": 484420,
+   "position": "Midfielder",
+   "price": 1,
+   "from_gw": 1,
+   "to_gw": null
+  },
+  {
+   "owner": "Karan",
+   "player": "Barnes",
+   "code": 201666,
+   "position": "Midfielder",
+   "price": 1,
+   "from_gw": 1,
+   "to_gw": null
+  },
+  {
+   "owner": "Karan",
+   "player": "Isak",
+   "code": 219168,
+   "position": "Forward",
+   "price": 34,
+   "from_gw": 1,
+   "to_gw": null
+  },
+  {
+   "owner": "Karan",
+   "player": "Marmoush",
+   "code": 438234,
+   "position": "Forward",
+   "price": 1,
+   "from_gw": 1,
+   "to_gw": null
+  },
+  {
+   "owner": "Karan",
+   "player": "Brobbey",
+   "code": 441264,
+   "position": "Forward",
+   "price": 6,
+   "from_gw": 1,
+   "to_gw": null
+  },
+  {
+   "owner": "Craig",
+   "player": "A.Becker",
+   "code": 116535,
+   "position": "Goalkeeper",
+   "price": 2,
+   "from_gw": 1,
+   "to_gw": null
+  },
+  {
+   "owner": "Craig",
+   "player": "Calafiori",
+   "code": 466075,
+   "position": "Defender",
+   "price": 6,
+   "from_gw": 1,
+   "to_gw": null
+  },
+  {
+   "owner": "Craig",
+   "player": "Hincapie",
+   "code": 448104,
+   "position": "Defender",
+   "price": 3,
+   "from_gw": 1,
+   "to_gw": null
+  },
+  {
+   "owner": "Craig",
+   "player": "N.Williams",
+   "code": 215136,
+   "position": "Defender",
+   "price": 2,
+   "from_gw": 1,
+   "to_gw": null
+  },
+  {
+   "owner": "Craig",
+   "player": "Semenyo",
+   "code": 437730,
+   "position": "Midfielder",
+   "price": 31,
+   "from_gw": 1,
+   "to_gw": null
+  },
+  {
+   "owner": "Craig",
+   "player": "Rogers",
+   "code": 244850,
+   "position": "Midfielder",
+   "price": 26,
+   "from_gw": 1,
+   "to_gw": null
+  },
+  {
+   "owner": "Craig",
+   "player": "Ødegaard",
+   "code": 184029,
+   "position": "Midfielder",
+   "price": 8,
+   "from_gw": 1,
+   "to_gw": null
+  },
+  {
+   "owner": "Craig",
+   "player": "O.Dango",
+   "code": 533463,
+   "position": "Midfielder",
+   "price": 4,
+   "from_gw": 1,
+   "to_gw": null
+  },
+  {
+   "owner": "Craig",
+   "player": "Gallagher",
+   "code": 232787,
+   "position": "Midfielder",
+   "price": 1,
+   "from_gw": 1,
+   "to_gw": null
+  },
+  {
+   "owner": "Craig",
+   "player": "Calvert-Lewin",
+   "code": 177815,
+   "position": "Forward",
+   "price": 13,
+   "from_gw": 1,
+   "to_gw": null
+  },
+  {
+   "owner": "Craig",
+   "player": "Mateta",
+   "code": 231747,
+   "position": "Forward",
+   "price": 4,
+   "from_gw": 1,
+   "to_gw": null
+  },
+  {
+   "owner": "Dave",
+   "player": "Henderson",
+   "code": 172649,
+   "position": "Goalkeeper",
+   "price": 1,
+   "from_gw": 1,
+   "to_gw": null
+  },
+  {
+   "owner": "Dave",
+   "player": "Tarkowski",
+   "code": 17761,
+   "position": "Defender",
+   "price": 6,
+   "from_gw": 1,
+   "to_gw": null
+  },
+  {
+   "owner": "Dave",
+   "player": "J.Timber",
+   "code": 445122,
+   "position": "Defender",
+   "price": 2,
+   "from_gw": 1,
+   "to_gw": null
+  },
+  {
+   "owner": "Dave",
+   "player": "Lacroix",
+   "code": 437499,
+   "position": "Defender",
+   "price": 5,
+   "from_gw": 1,
+   "to_gw": null
+  },
+  {
+   "owner": "Dave",
+   "player": "Tielemans",
+   "code": 166989,
+   "position": "Midfielder",
+   "price": 6,
+   "from_gw": 1,
+   "to_gw": null
+  },
+  {
+   "owner": "Dave",
+   "player": "Neto",
+   "code": 247632,
+   "position": "Midfielder",
+   "price": 2,
+   "from_gw": 1,
+   "to_gw": null
+  },
+  {
+   "owner": "Dave",
+   "player": "Rayan",
+   "code": 499604,
+   "position": "Midfielder",
+   "price": 7,
+   "from_gw": 1,
+   "to_gw": null
+  },
+  {
+   "owner": "Dave",
+   "player": "Buendía",
+   "code": 195546,
+   "position": "Midfielder",
+   "price": 1,
+   "from_gw": 1,
+   "to_gw": null
+  },
+  {
+   "owner": "Dave",
+   "player": "Fernandes",
+   "code": 551226,
+   "position": "Midfielder",
+   "price": 3,
+   "from_gw": 1,
+   "to_gw": null
+  },
+  {
+   "owner": "Dave",
+   "player": "Haaland",
+   "code": 223094,
+   "position": "Forward",
+   "price": 49,
+   "from_gw": 1,
+   "to_gw": null
+  },
+  {
+   "owner": "Dave",
+   "player": "Gyökeres",
+   "code": 224117,
+   "position": "Forward",
+   "price": 18,
+   "from_gw": 1,
+   "to_gw": null
+  },
+  {
+   "owner": "Sam",
+   "player": "Trafford",
+   "code": 432720,
+   "position": "Goalkeeper",
+   "price": 1,
+   "from_gw": 1,
+   "to_gw": null
+  },
+  {
+   "owner": "Sam",
+   "player": "Khusanov",
+   "code": 578153,
+   "position": "Defender",
+   "price": 1,
+   "from_gw": 1,
+   "to_gw": null
+  },
+  {
+   "owner": "Sam",
+   "player": "Colwill",
+   "code": 460028,
+   "position": "Defender",
+   "price": 1,
+   "from_gw": 1,
+   "to_gw": null
+  },
+  {
+   "owner": "Sam",
+   "player": "Muharemović",
+   "code": 522047,
+   "position": "Defender",
+   "price": 1,
+   "from_gw": 1,
+   "to_gw": null
+  },
+  {
+   "owner": "Sam",
+   "player": "Cherki",
+   "code": 466052,
+   "position": "Midfielder",
+   "price": 22,
+   "from_gw": 1,
+   "to_gw": null
+  },
+  {
+   "owner": "Sam",
+   "player": "Estêvão",
+   "code": 624773,
+   "position": "Midfielder",
+   "price": 10,
+   "from_gw": 1,
+   "to_gw": null
+  },
+  {
+   "owner": "Sam",
+   "player": "Scott",
+   "code": 503139,
+   "position": "Midfielder",
+   "price": 5,
+   "from_gw": 1,
+   "to_gw": null
+  },
+  {
+   "owner": "Sam",
+   "player": "Merino",
+   "code": 195384,
+   "position": "Midfielder",
+   "price": 2,
+   "from_gw": 1,
+   "to_gw": null
+  },
+  {
+   "owner": "Sam",
+   "player": "Tel",
+   "code": 511499,
+   "position": "Midfielder",
+   "price": 1,
+   "from_gw": 1,
+   "to_gw": null
+  },
+  {
+   "owner": "Sam",
+   "player": "João Pedro",
+   "code": 475168,
+   "position": "Forward",
+   "price": 36,
+   "from_gw": 1,
+   "to_gw": null
+  },
+  {
+   "owner": "Sam",
+   "player": "Šeško",
+   "code": 485711,
+   "position": "Forward",
+   "price": 16,
+   "from_gw": 1,
+   "to_gw": null
+  },
+  {
+   "owner": "Brim",
+   "player": "Kelleher",
+   "code": 200720,
+   "position": "Goalkeeper",
+   "price": 2,
+   "from_gw": 1,
+   "to_gw": null
+  },
+  {
+   "owner": "Brim",
+   "player": "Palestra",
+   "code": 620109,
+   "position": "Defender",
+   "price": 2,
+   "from_gw": 1,
+   "to_gw": null
+  },
+  {
+   "owner": "Brim",
+   "player": "Van de Ven",
+   "code": 491279,
+   "position": "Defender",
+   "price": 1,
+   "from_gw": 1,
+   "to_gw": null
+  },
+  {
+   "owner": "Brim",
+   "player": "Jacquet",
+   "code": 606702,
+   "position": "Defender",
+   "price": 1,
+   "from_gw": 1,
+   "to_gw": null
+  },
+  {
+   "owner": "Brim",
+   "player": "Robertson",
+   "code": 122798,
+   "position": "Defender",
+   "price": 1,
+   "from_gw": 1,
+   "to_gw": null
+  },
+  {
+   "owner": "Brim",
+   "player": "Palmer",
+   "code": 244851,
+   "position": "Midfielder",
+   "price": 30,
+   "from_gw": 1,
+   "to_gw": null
+  },
+  {
+   "owner": "Brim",
+   "player": "Mbeumo",
+   "code": 446008,
+   "position": "Midfielder",
+   "price": 22,
+   "from_gw": 1,
+   "to_gw": null
+  },
+  {
+   "owner": "Brim",
+   "player": "Szoboszlai",
+   "code": 424876,
+   "position": "Midfielder",
+   "price": 32,
+   "from_gw": 1,
+   "to_gw": null
+  },
+  {
+   "owner": "Brim",
+   "player": "Ngumoha",
+   "code": 611922,
+   "position": "Midfielder",
+   "price": 1,
+   "from_gw": 1,
+   "to_gw": null
+  },
+  {
+   "owner": "Brim",
+   "player": "Maddison",
+   "code": 172780,
+   "position": "Midfielder",
+   "price": 1,
+   "from_gw": 1,
+   "to_gw": null
+  },
+  {
+   "owner": "Brim",
+   "player": "Igor Jesus",
+   "code": 482973,
+   "position": "Forward",
+   "price": 5,
+   "from_gw": 1,
+   "to_gw": null
+  },
+  {
+   "owner": "Yeats",
+   "player": "Verbruggen",
+   "code": 489639,
+   "position": "Goalkeeper",
+   "price": 1,
+   "from_gw": 1,
+   "to_gw": null
+  },
+  {
+   "owner": "Yeats",
+   "player": "O'Reilly",
+   "code": 472769,
+   "position": "Defender",
+   "price": 14,
+   "from_gw": 1,
+   "to_gw": null
+  },
+  {
+   "owner": "Yeats",
+   "player": "Guéhi",
+   "code": 209036,
+   "position": "Defender",
+   "price": 8,
+   "from_gw": 1,
+   "to_gw": null
+  },
+  {
+   "owner": "Yeats",
+   "player": "Milenković",
+   "code": 227444,
+   "position": "Defender",
+   "price": 1,
+   "from_gw": 1,
+   "to_gw": null
+  },
+  {
+   "owner": "Yeats",
+   "player": "Mukiele",
+   "code": 200834,
+   "position": "Defender",
+   "price": 5,
+   "from_gw": 1,
+   "to_gw": null
+  },
+  {
+   "owner": "Yeats",
+   "player": "B.Fernandes",
+   "code": 141746,
+   "position": "Midfielder",
+   "price": 41,
+   "from_gw": 1,
+   "to_gw": null
+  },
+  {
+   "owner": "Yeats",
+   "player": "Bruno G.",
+   "code": 208706,
+   "position": "Midfielder",
+   "price": 21,
+   "from_gw": 1,
+   "to_gw": null
+  },
+  {
+   "owner": "Yeats",
+   "player": "Eze",
+   "code": 232413,
+   "position": "Midfielder",
+   "price": 6,
+   "from_gw": 1,
+   "to_gw": null
+  },
+  {
+   "owner": "Yeats",
+   "player": "Kluivert",
+   "code": 222683,
+   "position": "Midfielder",
+   "price": 1,
+   "from_gw": 1,
+   "to_gw": null
+  },
+  {
+   "owner": "Yeats",
+   "player": "Tonali",
+   "code": 432422,
+   "position": "Midfielder",
+   "price": 1,
+   "from_gw": 1,
+   "to_gw": null
+  },
+  {
+   "owner": "Yeats",
+   "player": "Welbeck",
+   "code": 50175,
+   "position": "Forward",
+   "price": 1,
+   "from_gw": 1,
+   "to_gw": null
+  },
+  {
+   "owner": "Rose",
+   "player": "Raya",
+   "code": 154561,
+   "position": "Goalkeeper",
+   "price": 9,
+   "from_gw": 1,
+   "to_gw": null
+  },
+  {
+   "owner": "Rose",
+   "player": "Pedro Porro",
+   "code": 441164,
+   "position": "Defender",
+   "price": 4,
+   "from_gw": 1,
+   "to_gw": null
+  },
+  {
+   "owner": "Rose",
+   "player": "James",
+   "code": 225796,
+   "position": "Defender",
+   "price": 3,
+   "from_gw": 1,
+   "to_gw": null
+  },
+  {
+   "owner": "Rose",
+   "player": "Araujo",
+   "code": 445087,
+   "position": "Defender",
+   "price": 1,
+   "from_gw": 1,
+   "to_gw": null
+  },
+  {
+   "owner": "Rose",
+   "player": "Hall",
+   "code": 487838,
+   "position": "Defender",
+   "price": 1,
+   "from_gw": 1,
+   "to_gw": null
+  },
+  {
+   "owner": "Rose",
+   "player": "Saka",
+   "code": 223340,
+   "position": "Midfielder",
+   "price": 33,
+   "from_gw": 1,
+   "to_gw": null
+  },
+  {
+   "owner": "Rose",
+   "player": "Cunha",
+   "code": 430871,
+   "position": "Midfielder",
+   "price": 25,
+   "from_gw": 1,
+   "to_gw": null
+  },
+  {
+   "owner": "Rose",
+   "player": "Enzo",
+   "code": 448047,
+   "position": "Midfielder",
+   "price": 17,
+   "from_gw": 1,
+   "to_gw": null
+  },
+  {
+   "owner": "Rose",
+   "player": "Richarlison",
+   "code": 212319,
+   "position": "Forward",
+   "price": 1,
+   "from_gw": 1,
+   "to_gw": null
+  },
+  {
+   "owner": "Rose",
+   "player": "Georginio",
+   "code": 463067,
+   "position": "Forward",
+   "price": 1,
+   "from_gw": 1,
+   "to_gw": null
+  },
+  {
+   "owner": "Rose",
+   "player": "Beto",
+   "code": 486385,
+   "position": "Forward",
+   "price": 1,
+   "from_gw": 1,
+   "to_gw": null
+  },
+  {
+   "owner": "Dan",
+   "player": "Donnarumma",
+   "code": 204936,
+   "position": "Goalkeeper",
+   "price": 6,
+   "from_gw": 1,
+   "to_gw": null
+  },
+  {
+   "owner": "Dan",
+   "player": "Kerkez",
+   "code": 544877,
+   "position": "Defender",
+   "price": 4,
+   "from_gw": 1,
+   "to_gw": null
+  },
+  {
+   "owner": "Dan",
+   "player": "Gvardiol",
+   "code": 477424,
+   "position": "Defender",
+   "price": 6,
+   "from_gw": 1,
+   "to_gw": null
+  },
+  {
+   "owner": "Dan",
+   "player": "Muñoz",
+   "code": 247348,
+   "position": "Defender",
+   "price": 2,
+   "from_gw": 1,
+   "to_gw": null
+  },
+  {
+   "owner": "Dan",
+   "player": "Rice",
+   "code": 204480,
+   "position": "Midfielder",
+   "price": 22,
+   "from_gw": 1,
+   "to_gw": null
+  },
+  {
+   "owner": "Dan",
+   "player": "Tzolis",
+   "code": 439509,
+   "position": "Midfielder",
+   "price": 9,
+   "from_gw": 1,
+   "to_gw": null
+  },
+  {
+   "owner": "Dan",
+   "player": "Foden",
+   "code": 209244,
+   "position": "Midfielder",
+   "price": 10,
+   "from_gw": 1,
+   "to_gw": null
+  },
+  {
+   "owner": "Dan",
+   "player": "Hinshelwood",
+   "code": 532529,
+   "position": "Midfielder",
+   "price": 1,
+   "from_gw": 1,
+   "to_gw": null
+  },
+  {
+   "owner": "Dan",
+   "player": "Havertz",
+   "code": 219847,
+   "position": "Forward",
+   "price": 11,
+   "from_gw": 1,
+   "to_gw": null
+  },
+  {
+   "owner": "Dan",
+   "player": "Madjo",
+   "code": 690838,
+   "position": "Forward",
+   "price": 1,
+   "from_gw": 1,
+   "to_gw": null
+  },
+  {
+   "owner": "Dan",
+   "player": "Woltemade",
+   "code": 470313,
+   "position": "Forward",
+   "price": 1,
+   "from_gw": 1,
+   "to_gw": null
+  },
+  {
+   "owner": "Rob",
+   "player": "Roefs",
+   "code": 498016,
+   "position": "Goalkeeper",
+   "price": 1,
+   "from_gw": 1,
+   "to_gw": null
+  },
+  {
+   "owner": "Rob",
+   "player": "Virgil",
+   "code": 97032,
+   "position": "Defender",
+   "price": 11,
+   "from_gw": 1,
+   "to_gw": null
+  },
+  {
+   "owner": "Rob",
+   "player": "Truffert",
+   "code": 494521,
+   "position": "Defender",
+   "price": 3,
+   "from_gw": 1,
+   "to_gw": null
+  },
+  {
+   "owner": "Rob",
+   "player": "Canvot",
+   "code": 651426,
+   "position": "Defender",
+   "price": 1,
+   "from_gw": 1,
+   "to_gw": null
+  },
+  {
+   "owner": "Rob",
+   "player": "Sarr",
+   "code": 232185,
+   "position": "Midfielder",
+   "price": 13,
+   "from_gw": 1,
+   "to_gw": null
+  },
+  {
+   "owner": "Rob",
+   "player": "Doku",
+   "code": 248875,
+   "position": "Midfielder",
+   "price": 25,
+   "from_gw": 1,
+   "to_gw": null
+  },
+  {
+   "owner": "Rob",
+   "player": "Anderson",
+   "code": 215379,
+   "position": "Midfielder",
+   "price": 16,
+   "from_gw": 1,
+   "to_gw": null
+  },
+  {
+   "owner": "Rob",
+   "player": "Ndiaye",
+   "code": 440993,
+   "position": "Midfielder",
+   "price": 1,
+   "from_gw": 1,
+   "to_gw": null
+  },
+  {
+   "owner": "Rob",
+   "player": "Watkins",
+   "code": 178301,
+   "position": "Forward",
+   "price": 25,
+   "from_gw": 1,
+   "to_gw": null
+  },
+  {
+   "owner": "Rob",
+   "player": "Solanke",
+   "code": 154566,
+   "position": "Forward",
+   "price": 1,
+   "from_gw": 1,
+   "to_gw": null
+  },
+  {
+   "owner": "Rob",
+   "player": "Osula",
+   "code": 538207,
+   "position": "Forward",
+   "price": 1,
+   "from_gw": 1,
+   "to_gw": null
+  }
+ ]
+}

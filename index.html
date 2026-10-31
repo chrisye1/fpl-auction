@@ -1,0 +1,578 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>FPL Auction 2026-27</title>
+<style>
+:root{--color-fg:#1f1f1e;--color-fg-muted:#6b6a66;--color-bg:#f7f6f3;--color-panel:#ffffff;--color-border-line:#e4e2dc;--color-bad:#c0392b;
+--cds-radius:10px;--cds-pad-xs:.35rem;--cds-pad-sm:.6rem;--cds-pad-md:.9rem;--cds-pad-lg:1.15rem;--cds-gap-xs:.35rem;--cds-gap-md:.9rem;
+--cds-font-size-caption:.75rem;--cds-font-size-body:.875rem;--cds-font-size-heading:1rem;--cds-font-size-title:2rem;--cds-font-weight-medium:600;
+--cds-chart-muted:#b9b6ad;--cds-chart-grid:#ecebe6;--cds-chart-reference:#8a877f;--cds-surface-popover:#ffffff;--cds-border:#d6d3cb;--cds-text-secondary:#6b6a66;
+--cds-shadow-popover:0 4px 14px rgba(0,0,0,.12);--cds-dur-slow:.25s;
+--font-anthropic-sans:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;--font-anthropic-serif:Georgia,"Times New Roman",serif}
+@media (prefers-color-scheme: dark){:root{--color-fg:#ecebe6;--color-fg-muted:#a09d95;--color-bg:#1b1b1a;--color-panel:#242422;--color-border-line:#3a3936;--color-bad:#e5645a;
+--cds-chart-muted:#5f5d57;--cds-chart-grid:#33322f;--cds-chart-reference:#85827a;--cds-surface-popover:#2c2b29;--cds-border:#4a4844;--cds-text-secondary:#a09d95;--cds-shadow-popover:0 4px 14px rgba(0,0,0,.5)}}
+html,body{margin:0;background:var(--color-bg);color:var(--color-fg);font-family:var(--font-anthropic-sans)}
+#dash-root{padding:clamp(1rem,3vw,2rem)}
+.dash-skeleton{background:var(--color-border-line);border-radius:6px;min-height:3rem}
+
+
+.fp { max-width: 1100px; margin-inline: auto; font-family: var(--font-anthropic-sans); color: var(--color-fg); }
+.fp * { box-sizing: border-box; }
+.fp-h1 { font-family: var(--font-anthropic-serif); font-weight: 400; font-size: var(--cds-font-size-title); margin: 0; line-height: 1.15; }
+.fp-take { margin: .35rem 0 0; color: var(--color-fg-muted); font-size: var(--cds-font-size-heading); }
+.fp-take span { color: var(--color-fg); font-variant-numeric: tabular-nums; }
+.fp-tabs { display: flex; gap: var(--cds-gap-xs); margin: var(--cds-pad-lg) 0 var(--cds-pad-md); border-bottom: 1px solid var(--color-border-line); }
+.fp-tab { background: none; border: 0; border-bottom: 2px solid transparent; padding: var(--cds-pad-xs) var(--cds-pad-md); color: var(--color-fg-muted); font: inherit; font-size: var(--cds-font-size-body); cursor: pointer; margin-bottom: -1px; }
+.fp-tab[aria-selected=true] { color: var(--color-fg); border-bottom-color: var(--color-fg); font-weight: var(--cds-font-weight-medium); }
+.fp-grid { display: grid; gap: var(--cds-gap-md); grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr)); margin-bottom: var(--cds-gap-md); }
+.fp-card { background: var(--color-panel); border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); padding: var(--cds-pad-lg); min-width: 0; margin-bottom: 0; }
+.fp-panel > .fp-card { margin-bottom: var(--cds-gap-md); }
+.fp-card h2 { font-size: var(--cds-font-size-heading); font-weight: var(--cds-font-weight-medium); margin: 0; }
+.fp-note { margin: .15rem 0 var(--cds-pad-md); color: var(--color-fg-muted); font-size: var(--cds-font-size-caption); }
+.fp-scroll { overflow: auto; max-height: 34rem; }
+.fp-table { width: 100%; border-collapse: collapse; font-size: var(--cds-font-size-body); font-variant-numeric: tabular-nums; }
+.fp-table th, .fp-table td { padding: .35rem .6rem; text-align: right; white-space: nowrap; border-bottom: 1px solid var(--color-border-line); }
+.fp-table th:first-child, .fp-table td:first-child, .fp-table .fp-l { text-align: left; }
+.fp-table th { position: sticky; top: 0; background: var(--color-panel); font-weight: var(--cds-font-weight-medium); color: var(--color-fg-muted); font-size: var(--cds-font-size-caption); z-index: 1; }
+.fp-table th button { all: unset; cursor: pointer; }
+.fp-table th button:hover { color: var(--color-fg); }
+.fp-table tr.fp-click { cursor: pointer; }
+.fp-table tr.fp-click:hover td { background: color-mix(in srgb, var(--color-fg) 5%, transparent); }
+.fp-table tr.fp-sel td { background: color-mix(in srgb, var(--color-fg) 9%, transparent); }
+.fp-chips { display: flex; flex-wrap: wrap; gap: var(--cds-gap-xs); margin-bottom: var(--cds-pad-sm); }
+.fp-chip { border: 1px solid var(--color-border-line); background: none; color: var(--color-fg); border-radius: 999px; padding: .2rem .7rem; font: inherit; font-size: var(--cds-font-size-caption); cursor: pointer; }
+.fp-chip[aria-pressed=true] { background: var(--color-fg); color: var(--color-bg); border-color: var(--color-fg); }
+.fp-search { font: inherit; font-size: var(--cds-font-size-body); padding: .3rem .6rem; border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); background: var(--color-bg); color: var(--color-fg); width: min(100%, 16rem); margin-bottom: var(--cds-pad-sm); }
+.fp-chart { position: relative; min-height: 18rem; }
+.fp-chart.fp-short { min-height: 14rem; }
+.fp-t { font-size: var(--cds-font-size-caption); fill: var(--color-fg-muted); font-family: var(--font-anthropic-sans); }
+.fp-tl { font-size: var(--cds-font-size-caption); fill: var(--color-fg); font-family: var(--font-anthropic-sans); }
+.fp-tip { position: absolute; pointer-events: none; background: var(--cds-surface-popover); border: 1px solid var(--cds-border); border-radius: var(--cds-radius); box-shadow: var(--cds-shadow-popover); padding: var(--cds-pad-xs) var(--cds-pad-sm); font-size: var(--cds-font-size-caption); z-index: 5; white-space: nowrap; }
+.fp-tip .fp-h { color: var(--cds-text-secondary); margin-bottom: 2px; }
+.fp-tip .fp-r { display: flex; gap: .4rem; align-items: center; justify-content: space-between; font-variant-numeric: tabular-nums; }
+.fp-tip i { display: inline-block; width: .55rem; height: .55rem; border-radius: 50%; }
+.fp-legend { display: flex; flex-wrap: wrap; gap: .25rem .9rem; margin-bottom: var(--cds-pad-xs); font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); }
+.fp-legend i { display: inline-block; width: .55rem; height: .55rem; border-radius: 50%; margin-right: .3rem; }
+.fp-fail { display: flex; align-items: center; justify-content: center; gap: .4rem; min-height: inherit; color: var(--color-fg-muted); font-size: var(--cds-font-size-caption); }
+.fp-fail::before { content: ""; width: .375rem; height: .375rem; border-radius: 50%; background: var(--color-bad); }
+.fp [data-dash-source-state=refreshing] { opacity: .5; transition: opacity var(--cds-dur-slow); }
+.fp [data-dash-source-state=empty] { color: transparent; }
+
+.fp-upd { margin: .3rem 0 0; color: var(--color-fg-muted); font-size: var(--cds-font-size-caption); }
+.fp-table tr.fp-sold td { color: var(--color-fg-muted); }
+</style></head>
+<body><div id="dash-root">
+
+<div class="fp">
+  <header>
+    <h1 class="fp-h1" id="fp-title">FPL Auction 2026-27</h1>
+    <p class="fp-take" id="fp-take"><span data-source="lead" data-row="0" data-field="leader">—</span> leads after gameweek <span data-source="lead" data-row="0" data-field="gw">—</span> on <span data-source="lead" data-row="0" data-field="points">—</span> points, <span data-source="lead" data-row="0" data-field="lead">—</span> clear of <span data-source="lead" data-row="0" data-field="runner_up">—</span>.</p>
+    <p class="fp-upd" id="fp-updated">Loading points…</p>
+  </header>
+
+  <div class="fp-tabs" role="tablist">
+    <button class="fp-tab" role="tab" id="tab-league" aria-selected="true" data-tab="league">League</button>
+    <button class="fp-tab" role="tab" id="tab-players" aria-selected="false" data-tab="players">Squads &amp; players</button>
+  </div>
+
+  <section class="fp-panel" id="league">
+    <div class="fp-card" id="standings-card">
+      <h2>Standings</h2>
+      <p class="fp-note">Click a manager to see their squad. Points are season totals; spend is out of the £100m auction budget.</p>
+      <div class="fp-scroll">
+        <table class="fp-table" id="fp-standings" data-source="standings" data-row-key="owner">
+          <thead><tr>
+            <th data-field="overall_rank">#</th>
+            <th data-field="owner" class="fp-l">Manager</th>
+            <th data-field="points">Points</th>
+            <th data-field="gw_points">Latest GW</th>
+            <th data-field="gw_rank">GW rank</th>
+            <th data-field="spent">Spent £m</th>
+            <th data-field="remaining">Left £m</th>
+          </tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="fp-card">
+      <h2>Season race</h2>
+      <p class="fp-note">Cumulative points by gameweek. Top three in colour; hover for the full table at any week.</p>
+      <div class="fp-chart" id="fp-cum" data-source="cumulative standings"></div>
+    </div>
+
+    <div class="fp-grid">
+      <div class="fp-card">
+        <h2>Points by gameweek</h2>
+        <p class="fp-note">Darker means a bigger week. Last 12 gameweeks, managers in standings order.</p>
+        <div class="fp-chart fp-short" id="fp-heat" data-source="owner_gw standings"></div>
+      </div>
+      <div class="fp-card">
+        <h2>Gameweek winners</h2>
+        <p class="fp-note">Highest-scoring manager each week.</p>
+        <div class="fp-scroll">
+          <table class="fp-table" id="fp-winners" data-source="gw_winners" data-row-key="gw">
+            <thead><tr>
+              <th data-field="gw">Gameweek</th>
+              <th data-field="owner" class="fp-l">Winner</th>
+              <th data-field="points">Points</th>
+            </tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="fp-panel" id="players" hidden>
+    <div class="fp-card">
+      <h2>Price paid vs points</h2>
+      <p class="fp-note">Every owned player: what they cost at auction against what they have scored. Above the pack means a bargain.</p>
+      <div class="fp-chart" id="fp-scatter" data-source="players"></div>
+    </div>
+
+    <div class="fp-card">
+      <h2>Squads and players</h2>
+      <p class="fp-note" id="fp-count">Pick a manager, search, or click a column to sort. Pts/£ is points per £m paid.</p>
+      <div class="fp-chips" id="fp-chips" data-source="standings"></div>
+      <input class="fp-search" id="fp-q" type="search" placeholder="Search player, team or position" aria-label="Search players">
+      <div class="fp-scroll">
+        <table class="fp-table" id="fp-players" data-source="players" data-row-key="owner,player">
+          <thead><tr></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+</div>
+
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+<script>
+const __store = {};
+const __calcs = [];
+let __cb = () => {};
+const __params = {};
+window.dash = {
+  colors: ['#2f6fdb','#e8833a','#2a9d8f','#9b5de5','#d4a017','#d6456b','#6a994e','#7a7d85'],
+  data: (id) => (id in __store ? { status: 'ok', data: __store[id] } : { status: 'loading', data: [] }),
+  calc: (id, o) => { __calcs.push([id, o]); },
+  setData: (obj) => { Object.assign(__store, obj); __calcs.forEach(([id, o]) => { __store[id] = o.fn(...o.inputs.map((i) => __store[i])); }); __cb(); },
+  params: () => ({ ...__params }),
+  setParams: (p) => { Object.assign(__params, p); __cb(); },
+  resetParams: () => { Object.keys(__params).forEach((k) => delete __params[k]); __cb(); },
+  onData: (fn) => { __cb = fn; fn(); let t; new ResizeObserver(() => { clearTimeout(t); t = setTimeout(fn, 80); }).observe(document.body); },
+  setLink: (n) => { try { history.replaceState(null, '', '#' + n); } catch (e) {} },
+  refresh: () => {},
+};
+</script>
+<script>
+const COLORS = dash.colors;
+const MUTED = 'var(--cds-chart-muted)';
+const POS = ['Goalkeeper', 'Defender', 'Midfielder', 'Forward'];
+const $ = (s) => document.querySelector(s);
+
+dash.calc('cumulative', {
+  inputs: ['owner_gw'],
+  title: 'Cumulative points',
+  description: 'Running total of weekly points for each manager.',
+  fn: (owner_gw) => {
+    const run = {};
+    return [...owner_gw].sort((a, b) => Number(a.gw) - Number(b.gw)).map((r) => {
+      const p = Number(r.points);
+      run[r.owner] = (run[r.owner] || 0) + p;
+      return { owner: r.owner, gw: Number(r.gw), points: p, cum: run[r.owner] };
+    });
+  },
+});
+dash.calc('lead', {
+  inputs: ['standings', 'owner_gw'],
+  title: 'League leader',
+  description: 'Leader, runner-up and the points gap between them.',
+  fn: (standings, owner_gw) => {
+    const s = [...standings].sort((a, b) => Number(b.points) - Number(a.points));
+    if (s.length < 2) return [];
+    return [{ leader: s[0].owner, runner_up: s[1].owner, points: Number(s[0].points), lead: Number(s[0].points) - Number(s[1].points), gw: Math.max(...owner_gw.map((r) => Number(r.gw))) }];
+  },
+});
+dash.calc('gw_winners', {
+  inputs: ['owner_gw'],
+  title: 'Gameweek winners',
+  description: 'Top-scoring manager in each gameweek (first listed wins a tie).',
+  fn: (owner_gw) => {
+    const best = {};
+    owner_gw.forEach((r) => {
+      const g = Number(r.gw), p = Number(r.points);
+      if (!best[g] || p > best[g].points) best[g] = { gw: g, owner: r.owner, points: p };
+    });
+    return Object.values(best).sort((a, b) => a.gw - b.gw);
+  },
+});
+dash.calc('players_value', {
+  inputs: ['players'],
+  title: 'Points per £m',
+  description: 'Season points divided by auction price, per player.',
+  fn: (players) => players.map((r) => ({ owner: r.owner, player: r.player, ppm: Math.round((Number(r.total) / Number(r.price)) * 100) / 100 })),
+});
+
+const status = (id) => dash.data(id).status;
+const ready = (ids) => ids.every((i) => status(i) === 'ok');
+const failed = (ids) => ids.some((i) => ['error', 'connect', 'declined', 'missing'].includes(status(i)));
+function paint(box, ids, draw) {
+  box.classList.remove('dash-skeleton');
+  if (box.clientWidth === 0 && box.closest('[hidden]')) return;
+  if (ready(ids)) { draw(); return; }
+  box.replaceChildren();
+  if (failed(ids)) { const d = document.createElement('div'); d.className = 'fp-fail'; d.textContent = 'Failed to load'; box.append(d); }
+  else box.classList.add('dash-skeleton');
+}
+const orderedOwners = () => [...dash.data('standings').data].sort((a, b) => Number(a.overall_rank) - Number(b.overall_rank)).map((r) => r.owner);
+const ownerColor = (o, order) => { const i = order.indexOf(o); return i >= 0 && i < 3 ? COLORS[i] : MUTED; };
+
+function svgIn(box, W, H) {
+  box.replaceChildren();
+  return d3.select(box).append('svg').attr('width', '100%').attr('viewBox', `0 0 ${W} ${H}`).attr('role', 'img').style('display', 'block');
+}
+function measure(svg, texts, cls) {
+  const g = svg.append('g').attr('visibility', 'hidden');
+  let m = 0;
+  texts.forEach((t) => { m = Math.max(m, g.append('text').attr('class', cls).text(String(t)).node().getComputedTextLength()); });
+  g.remove();
+  return m;
+}
+function tip(box) {
+  let t = box.querySelector('.fp-tip');
+  if (!t) { t = document.createElement('div'); t.className = 'fp-tip'; t.hidden = true; box.append(t); }
+  return {
+    show(head, rows, x, y) {
+      t.replaceChildren();
+      if (head) { const h = document.createElement('div'); h.className = 'fp-h'; h.textContent = head; t.append(h); }
+      rows.forEach(([c, a, b]) => {
+        const r = document.createElement('div'); r.className = 'fp-r';
+        const l = document.createElement('span');
+        if (c) { const i = document.createElement('i'); i.style.background = c; l.append(i, ' '); }
+        l.append(a);
+        const v = document.createElement('span'); v.textContent = b;
+        r.append(l, v); t.append(r);
+      });
+      t.hidden = false;
+      const w = t.offsetWidth, h = t.offsetHeight, bw = box.clientWidth, bh = box.clientHeight;
+      t.style.left = Math.max(0, Math.min(bw - w, x + 12)) + 'px';
+      t.style.top = Math.max(0, Math.min(bh - h, y - h / 2)) + 'px';
+    },
+    hide() { t.hidden = true; },
+  };
+}
+
+// ---------- League ----------
+function cell(tr, text, cls) { const td = document.createElement('td'); td.textContent = text; if (cls) td.className = cls; tr.append(td); return td; }
+
+function drawStandings() {
+  const tb = $('#fp-standings tbody');
+  const rows = [...dash.data('standings').data].sort((a, b) => Number(a.overall_rank) - Number(b.overall_rank));
+  const sel = dash.params().owner;
+  tb.replaceChildren(...rows.map((r) => {
+    const tr = document.createElement('tr');
+    tr.className = 'fp-click' + (sel === r.owner ? ' fp-sel' : '');
+    tr.dataset.key = r.owner; tr.tabIndex = 0;
+    ['overall_rank', 'owner', 'points', 'gw_points', 'gw_rank', 'spent', 'remaining'].forEach((f) => cell(tr, r[f], f === 'owner' ? 'fp-l' : ''));
+    return tr;
+  }));
+}
+function drawWinners() {
+  $('#fp-winners tbody').replaceChildren(...dash.data('gw_winners').data.map((r) => {
+    const tr = document.createElement('tr');
+    ['gw', 'owner', 'points'].forEach((f) => cell(tr, r[f], f === 'owner' ? 'fp-l' : ''));
+    return tr;
+  }));
+}
+
+function drawCum(box) {
+  const rows = dash.data('cumulative').data;
+  const order = orderedOwners();
+  const sel = dash.params().owner;
+  const W = box.clientWidth || 600, H = Math.max(300, Math.min(420, Math.round(W * 0.55)));
+  const svg = svgIn(box, W, H);
+  const last = {}; rows.forEach((r) => { last[r.owner] = r; });
+  const labels = order.map((o) => `${o} ${last[o] ? last[o].cum : ''}`);
+  const m = { t: 12, r: measure(svg, labels, 'fp-tl') + 12, b: 26, l: 36 };
+  const maxGw = d3.max(rows, (r) => r.gw), maxY = d3.max(rows, (r) => r.cum);
+  const x = d3.scaleLinear([1, Math.max(2, maxGw)], [m.l, W - m.r]);
+  const y = d3.scaleLinear([0, maxY], [H - m.b, m.t]).nice();
+  y.ticks(5).forEach((v) => {
+    svg.append('line').attr('x1', m.l).attr('x2', W - m.r).attr('y1', y(v)).attr('y2', y(v)).style('stroke', 'var(--cds-chart-grid)');
+    svg.append('text').attr('class', 'fp-t').attr('x', m.l - 6).attr('y', y(v) + 3).attr('text-anchor', 'end').text(v);
+  });
+  const step = Math.ceil(maxGw / 9);
+  d3.range(1, maxGw + 1).filter((g) => g === 1 || g === maxGw || g % step === 0).forEach((g) => svg.append('text').attr('class', 'fp-t').attr('x', x(g)).attr('y', H - 8).attr('text-anchor', 'middle').text('GW' + g));
+  const line = d3.line().x((r) => x(r.gw)).y((r) => y(r.cum));
+  const byOwner = d3.group(rows, (r) => r.owner);
+  const draw = [...order].reverse();
+  draw.forEach((o) => {
+    const pts = byOwner.get(o) || [];
+    const isSel = sel === o;
+    svg.append('path').datum(pts).attr('d', line).attr('fill', 'none')
+      .style('stroke', ownerColor(o, order)).attr('stroke-width', isSel ? 3.5 : 2).attr('stroke-linecap', 'round').attr('stroke-linejoin', 'round')
+      .attr('opacity', sel && !isSel ? 0.35 : 1);
+  });
+  // end labels with spacing
+  const ends = order.filter((o) => last[o]).map((o) => ({ o, y: y(last[o].cum), v: last[o].cum })).sort((a, b) => a.y - b.y);
+  for (let i = 1; i < ends.length; i++) if (ends[i].y - ends[i - 1].y < 13) ends[i].y = ends[i - 1].y + 13;
+  ends.forEach((e) => svg.append('text').attr('class', 'fp-tl').attr('x', W - m.r + 6).attr('y', e.y + 3).style('fill', ownerColor(e.o, order) === MUTED ? 'var(--color-fg-muted)' : ownerColor(e.o, order)).text(`${e.o} ${e.v}`));
+  // hover
+  const T = tip(box);
+  const rule = svg.append('line').attr('y1', m.t).attr('y2', H - m.b).style('stroke', 'var(--cds-chart-reference)').attr('visibility', 'hidden');
+  svg.append('rect').attr('x', m.l).attr('y', m.t).attr('width', W - m.l - m.r).attr('height', H - m.t - m.b).attr('fill', 'transparent')
+    .on('mousemove', (ev) => {
+      const [px, py] = d3.pointer(ev, box);
+      const g = Math.max(1, Math.min(maxGw, Math.round(x.invert(d3.pointer(ev, svg.node())[0]))));
+      rule.attr('x1', x(g)).attr('x2', x(g)).attr('visibility', 'visible');
+      const at = order.map((o) => (byOwner.get(o) || []).find((r) => r.gw === g)).filter(Boolean).sort((a, b) => b.cum - a.cum);
+      T.show('Gameweek ' + g, at.map((r) => [ownerColor(r.owner, order) === MUTED ? 'var(--cds-chart-muted)' : ownerColor(r.owner, order), r.owner, `${r.cum} (+${r.points})`]), px, py);
+    })
+    .on('mouseleave', () => { rule.attr('visibility', 'hidden'); T.hide(); });
+}
+
+function drawHeat(box) {
+  const rows = dash.data('owner_gw').data.map((r) => ({ owner: r.owner, gw: Number(r.gw), points: Number(r.points) }));
+  const order = orderedOwners();
+  const maxGw = d3.max(rows, (r) => r.gw), maxP = d3.max(rows, (r) => r.points);
+  const gws = d3.range(Math.max(1, maxGw - 11), maxGw + 1);
+  const W = box.clientWidth || 400, rh = 28;
+  const H = order.length * rh + 26;
+  const svg = svgIn(box, W, H);
+  const lw = measure(svg, order, 'fp-tl') + 10;
+  const cw = (W - lw) / gws.length;
+  const by = new Map(rows.map((r) => [r.owner + '|' + r.gw, r.points]));
+  gws.forEach((g, gi) => svg.append('text').attr('class', 'fp-t').attr('x', lw + (gi + 0.5) * cw).attr('y', 11).attr('text-anchor', 'middle').text(g));
+  order.forEach((o, i) => {
+    svg.append('text').attr('class', 'fp-tl').attr('x', lw - 8).attr('y', 26 + i * rh + rh / 2 + 1).attr('text-anchor', 'end').text(o);
+    gws.forEach((g, gi) => {
+      const p = by.get(o + '|' + g);
+      if (p === undefined) return;
+      const pct = 8 + 72 * (p / maxP);
+      svg.append('rect').attr('x', lw + gi * cw + 1).attr('y', 26 + i * rh + 1).attr('width', cw - 2).attr('height', rh - 2).attr('rx', 4)
+        .style('fill', `color-mix(in srgb, ${COLORS[0]} ${pct}%, transparent)`);
+      svg.append('text').attr('class', 'fp-tl').attr('x', lw + (gi + 0.5) * cw).attr('y', 26 + i * rh + rh / 2 + 4).attr('text-anchor', 'middle').text(p);
+    });
+  });
+}
+
+// ---------- Players ----------
+let sort = { key: 'total', dir: -1 };
+let query = '';
+const NUM_BASE = new Set(['price', 'total', 'ppm', 'goals', 'assists', 'bonus']);
+const isNum = (k) => NUM_BASE.has(k) || /^gw\d+$/.test(k);
+let COLS = [];
+let hdrGw = -1;
+const LEFT = new Set(['player', 'owner', 'position', 'note']);
+function buildHeader(maxGw) {
+  if (hdrGw === maxGw) return;
+  hdrGw = maxGw;
+  const gws = d3.range(1, maxGw + 1).map((g) => ['gw' + g, 'GW' + g]);
+  const cols = [['player', 'Player'], ['owner', 'Manager'], ['position', 'Position'], ['price', '£m'], ...gws, ['total', 'Pts'], ['ppm', 'Pts/£'], ['goals', 'G'], ['assists', 'A'], ['bonus', 'Bonus'], ['note', 'Status']];
+  COLS = cols.map((c) => c[0]);
+  const tr = $('#fp-players thead tr');
+  tr.replaceChildren(...cols.map(([f, label]) => {
+    const th = document.createElement('th'); th.dataset.field = f; if (LEFT.has(f)) th.className = 'fp-l';
+    const b = document.createElement('button'); b.type = 'button'; b.textContent = label; th.append(b);
+    return th;
+  }));
+}
+
+function drawChips() {
+  const box = $('#fp-chips');
+  const sel = dash.params().owner || '';
+  const items = [['', 'Everyone'], ...orderedOwners().map((o) => [o, o])];
+  box.replaceChildren(...items.map(([v, label]) => {
+    const b = document.createElement('button');
+    b.className = 'fp-chip'; b.type = 'button'; b.textContent = label; b.dataset.owner = v;
+    b.setAttribute('aria-pressed', String(sel === v));
+    return b;
+  }));
+}
+function playerRows() {
+  const val = new Map(dash.data('players_value').data.map((r) => [r.owner + '\u0000' + r.player, r.ppm]));
+  const sel = dash.params().owner;
+  const q = query.trim().toLowerCase();
+  let rows = dash.data('players').data.map((r) => ({ ...r, ppm: val.get(r.owner + '\u0000' + r.player) }));
+  if (sel) rows = rows.filter((r) => r.owner === sel);
+  if (q) rows = rows.filter((r) => `${r.player} ${r.owner} ${r.position}`.toLowerCase().includes(q));
+  const k = sort.key, num = isNum(k);
+  rows.sort((a, b) => (num ? (Number(a[k]) - Number(b[k])) : String(a[k]).localeCompare(String(b[k]))) * sort.dir || String(a.player).localeCompare(String(b.player)));
+  return rows;
+}
+function drawPlayersTable() {
+  const rows = playerRows();
+  const tb = $('#fp-players tbody');
+  tb.replaceChildren(...rows.map((r) => {
+    const tr = document.createElement('tr');
+    tr.dataset.key = encodeURIComponent(r.owner) + ',' + encodeURIComponent(r.player);
+    if (r.note.startsWith('Sold')) tr.className = 'fp-sold';
+    COLS.forEach((f) => cell(tr, r[f] == null ? '–' : r[f], LEFT.has(f) ? 'fp-l' : ''));
+    return tr;
+  }));
+  const sel = dash.params().owner;
+  $('#fp-count').textContent = `${rows.length} players${sel ? ' in ' + sel + '’s squad' : ''}. Click a column to sort; Pts/£ is points per £m paid.`;
+  document.querySelectorAll('#fp-players th').forEach((th) => {
+    const f = th.dataset.field;
+    th.setAttribute('aria-sort', f === sort.key ? (sort.dir > 0 ? 'ascending' : 'descending') : 'none');
+  });
+}
+function drawScatter(box) {
+  const rows = dash.data('players').data.map((r) => ({ ...r, price: Number(r.price), total: Number(r.total) }));
+  const W = box.clientWidth || 600, H = Math.max(300, Math.min(420, Math.round(W * 0.55)));
+  box.replaceChildren();
+  const lg = document.createElement('div'); lg.className = 'fp-legend';
+  POS.forEach((p, i) => { const s = document.createElement('span'); const d = document.createElement('i'); d.style.background = COLORS[i]; s.append(d, p); lg.append(s); });
+  box.append(lg);
+  const wrap = document.createElement('div'); wrap.style.position = 'relative'; box.append(wrap);
+  const svg = d3.select(wrap).append('svg').attr('width', '100%').attr('viewBox', `0 0 ${W} ${H}`).style('display', 'block');
+  const m = { t: 10, r: 14, b: 34, l: 38 };
+  const x = d3.scaleLinear([0, d3.max(rows, (r) => r.price) + 2], [m.l, W - m.r]).nice();
+  const y = d3.scaleLinear([0, d3.max(rows, (r) => r.total) + 4], [H - m.b, m.t]).nice();
+  y.ticks(5).forEach((v) => {
+    svg.append('line').attr('x1', m.l).attr('x2', W - m.r).attr('y1', y(v)).attr('y2', y(v)).style('stroke', 'var(--cds-chart-grid)');
+    svg.append('text').attr('class', 'fp-t').attr('x', m.l - 6).attr('y', y(v) + 3).attr('text-anchor', 'end').text(v);
+  });
+  x.ticks(6).forEach((v) => svg.append('text').attr('class', 'fp-t').attr('x', x(v)).attr('y', H - 16).attr('text-anchor', 'middle').text('£' + v));
+  svg.append('text').attr('class', 'fp-t').attr('x', (m.l + W - m.r) / 2).attr('y', H - 2).attr('text-anchor', 'middle').text('Price paid (£m)');
+  const sel = dash.params().owner;
+  rows.forEach((r) => {
+    svg.append('circle').attr('cx', x(r.price)).attr('cy', y(r.total)).attr('r', sel && r.owner === sel ? 6 : 4.5)
+      .style('fill', COLORS[Math.max(0, POS.indexOf(r.position))]).attr('opacity', sel && r.owner !== sel ? 0.2 : 0.8);
+  });
+  // labels: top scorers and priciest underperformers
+  const picks = [...rows].sort((a, b) => b.total - a.total).slice(0, 6)
+    .concat([...rows].filter((r) => r.price >= 15).sort((a, b) => a.total / a.price - b.total / b.price).slice(0, 4));
+  const placed = [];
+  picks.forEach((r) => {
+    const w = r.player.length * 6 + 4, left = x(r.price) > W - m.r - w - 12;
+    const bx = left ? x(r.price) - 8 - w : x(r.price) + 8, by = y(r.total) - 6;
+    if (placed.some((p) => bx < p.x + p.w && bx + w > p.x && Math.abs(by - p.y) < 12)) return;
+    placed.push({ x: bx, w, y: by });
+    svg.append('text').attr('class', 'fp-t').attr('x', left ? x(r.price) - 8 : x(r.price) + 8).attr('y', y(r.total) - 3).attr('text-anchor', left ? 'end' : 'start').text(r.player);
+  });
+  const T = tip(wrap);
+  const dl = d3.Delaunay.from(rows, (r) => x(r.price), (r) => y(r.total));
+  svg.append('rect').attr('x', m.l).attr('y', m.t).attr('width', W - m.l - m.r).attr('height', H - m.t - m.b).attr('fill', 'transparent')
+    .on('mousemove', (ev) => {
+      const [sx, sy] = d3.pointer(ev, svg.node());
+      const r = rows[dl.find(sx, sy)];
+      const [px, py] = d3.pointer(ev, wrap);
+      if (Math.hypot(x(r.price) - sx, y(r.total) - sy) > 24) { T.hide(); return; }
+      T.show(r.player, [[null, 'Manager', r.owner], [null, 'Position', r.position], [null, 'Paid', '£' + r.price + 'm'], [null, 'Points', r.total]], px, py);
+    })
+    .on('mouseleave', () => T.hide());
+}
+
+// ---------- wiring ----------
+let tab = 'league';
+function showTab(t) {
+  tab = t;
+  document.querySelectorAll('.fp-tab').forEach((b) => b.setAttribute('aria-selected', String(b.dataset.tab === t)));
+  $('#league').hidden = t !== 'league';
+  $('#players').hidden = t !== 'players';
+  dash.setLink(t);
+  render();
+}
+document.querySelectorAll('.fp-tab').forEach((b) => b.addEventListener('click', () => showTab(b.dataset.tab)));
+
+$('#fp-standings').addEventListener('click', (e) => {
+  const tr = e.target.closest('tr[data-key]');
+  if (!tr) return;
+  dash.setParams({ owner: tr.dataset.key });
+  showTab('players');
+});
+$('#fp-chips').addEventListener('click', (e) => {
+  const b = e.target.closest('button[data-owner]');
+  if (b) dash.setParams({ owner: b.dataset.owner || null });
+});
+$('#fp-q').addEventListener('input', (e) => { query = e.target.value; if (ready(['players', 'players_value'])) drawPlayersTable(); });
+$('#fp-players thead').addEventListener('click', (e) => {
+  const th = e.target.closest('th[data-field]');
+  if (!th) return;
+  const k = th.dataset.field;
+  sort = { key: k, dir: sort.key === k ? -sort.dir : (isNum(k) ? -1 : 1) };
+  if (ready(['players', 'players_value'])) drawPlayersTable();
+});
+
+function drawTake() {
+  const d = dash.data('lead');
+  document.querySelectorAll('#fp-take [data-field]').forEach((s) => {
+    const row = d.status === 'ok' ? d.data[0] : null;
+    s.textContent = row ? row[s.dataset.field] : '—';
+  });
+}
+function drawUpdated() {
+  const el = $('#fp-updated');
+  const meta = window.__meta;
+  if (window.__loadError) { el.textContent = 'Could not load the latest points. Try reloading in a moment.'; return; }
+  if (!meta) return;
+  const when = meta.updated ? new Date(meta.updated).toLocaleString(undefined, { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' }) : '';
+  el.textContent = `Points last changed ${when} · through gameweek ${meta.current_gw}. Checked hourly.`;
+}
+function render() {
+  drawTake();
+  drawUpdated();
+  if (window.__maxGw) buildHeader(window.__maxGw);
+  if (tab === 'league') {
+    const t = $('#fp-standings tbody'); paint(t, ['standings'], drawStandings);
+    paint($('#fp-winners tbody'), ['gw_winners'], drawWinners);
+    paint($('#fp-cum'), ['cumulative', 'standings'], () => drawCum($('#fp-cum')));
+    paint($('#fp-heat'), ['owner_gw', 'standings'], () => drawHeat($('#fp-heat')));
+  } else {
+    paint($('#fp-scatter'), ['players'], () => drawScatter($('#fp-scatter')));
+    paint($('#fp-chips'), ['standings'], drawChips);
+    paint($('#fp-players tbody'), ['players', 'players_value'], drawPlayersTable);
+  }
+}
+dash.onData(render);
+const named = document.getElementById(location.hash.slice(1));
+if (named && (named.id === 'league' || named.id === 'players')) showTab(named.id);
+</script>
+<script>
+(async () => {
+  try {
+    const bust = '?t=' + Date.now();
+    const [sq, pts] = await Promise.all([
+      fetch('squads.json' + bust).then((r) => { if (!r.ok) throw new Error('squads'); return r.json(); }),
+      fetch('data/points.json' + bust).then((r) => { if (!r.ok) throw new Error('points'); return r.json(); }),
+    ]);
+    const cur = Number(pts.current_gw) || 0;
+    const budget = Number(sq.budget) || 100;
+    const players = sq.squads.map((e) => {
+      const d = pts.players[e.owner + '|' + e.player] || { gws: {}, position: '' };
+      const from = e.from_gw == null ? 1 : Number(e.from_gw), to = e.to_gw == null ? Infinity : Number(e.to_gw);
+      const row = { owner: e.owner, player: e.player, position: e.position || d.position || '', price: Number(e.price) };
+      let total = 0, minutes = 0, goals = 0, assists = 0, bonus = 0;
+      for (let g = 1; g <= cur; g++) {
+        const x = d.gws[g], on = g >= from && g <= to;
+        row['gw' + g] = on ? (x ? x.p : 0) : null;
+        if (on && x) { total += x.p; minutes += x.m; goals += x.g; assists += x.a; bonus += x.b; }
+      }
+      Object.assign(row, { total, minutes, goals, assists, bonus });
+      row.note = e.to_gw != null ? 'Sold after GW' + e.to_gw : (from > 1 ? 'Joined GW' + from : '');
+      row.held = e.to_gw == null;
+      return row;
+    });
+    const owners = [...new Set(players.map((p) => p.owner))];
+    const owner_gw = [];
+    owners.forEach((o) => { for (let g = 1; g <= cur; g++) owner_gw.push({ owner: o, gw: g, points: players.filter((p) => p.owner === o).reduce((s, p) => s + (p['gw' + g] || 0), 0) }); });
+    const stand = owners.map((o) => {
+      const mine = players.filter((p) => p.owner === o);
+      const spent = mine.filter((p) => p.held).reduce((s, p) => s + p.price, 0);
+      return { owner: o, points: mine.reduce((s, p) => s + p.total, 0), gw_points: cur ? mine.reduce((s, p) => s + (p['gw' + cur] || 0), 0) : 0, spent, remaining: Math.round((budget - spent) * 10) / 10 };
+    });
+    stand.sort((a, b) => b.points - a.points);
+    stand.forEach((s, i) => { s.overall_rank = i + 1; });
+    [...stand].sort((a, b) => b.gw_points - a.gw_points).forEach((s, i, arr) => { s.gw_rank = arr.findIndex((x) => x.gw_points === s.gw_points) + 1; });
+    window.__meta = { updated: pts.updated, current_gw: cur };
+    window.__maxGw = Math.max(1, cur);
+    dash.setData({ standings: stand, owner_gw, players });
+  } catch (e) {
+    window.__loadError = true;
+    dash.setParams({});
+  }
+})();
+</script>
+</body></html>
